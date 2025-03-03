@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /**
- * ReadFromConsole 类提供了从控制台读取整数和浮点数的方法。
+ * 从控制台读取整数和浮点数的方法。
  * 该类包含两个静态方法：readInt() 和 readDouble()，用于读取用户输入的整数和浮点数。
  */
 public class ReadFromConsole {
