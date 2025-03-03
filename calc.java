@@ -1,9 +1,16 @@
+/**
+ * 计算税收的类。
+ * 提供了计算税收、打印税率设置、设置税率和基数等功能。
+ */
 public class calc {
     private int size = 5;
     double[] tax_rate = new double[size];
     double[] taxable_income_bound = new double[size - 1];
     private int base = 1600;
 
+    /**
+     * 构造函数，初始化税率和应税收入边界。
+     */
     public calc() {
         // 初始化设置
         tax_rate[0] = 0.05;
@@ -17,7 +24,13 @@ public class calc {
         taxable_income_bound[3] = 20000;
     }
 
-    public double calc_tax(double income) {
+    /**
+     * 计算给定收入的税收。
+     *
+     * @param income 收入
+     * @return 计算出的税收
+     */
+    public double calcTax(double income) {
         // 计算税收
         if (income <= base) {
             return 0;
@@ -43,7 +56,10 @@ public class calc {
         return tax;
     }
 
-    public void print_settings() {
+    /**
+     * 打印当前的税率设置。
+     */
+    public void printSettings() {
         String line = "+--------+-----------------------------------------------+--------+";
         System.out.println(line);
         System.out.printf("| %-6s | %-45s | %-6s |\n", "Level", "Taxable Income Amount", "Rate%");
@@ -62,7 +78,14 @@ public class calc {
 
     }
 
-    public void set_tax_rate(int level, double rate) {
+    /**
+     * 设置指定级别的税率。
+     *
+     * @param level 税率级别（1到5）
+     * @param rate  税率（0到1之间）
+     * @throws IllegalArgumentException 如果级别或税率无效
+     */
+    public void setTaxRate(int level, double rate) {
         if (level < 1 || level > size) {
             throw new IllegalArgumentException("Level must be between 1 and " + size);
         }
@@ -72,13 +95,24 @@ public class calc {
         tax_rate[level - 1] = rate;
     }
 
-    public void set_base(int base) {
+    /**
+     * 设置税收基数。
+     *
+     * @param base 税收基数
+     * @throws IllegalArgumentException 如果基数为负
+     */
+    public void setBase(int base) {
         if (base < 0) {
             throw new IllegalArgumentException("Base must be non-negative");
         }
         this.base = base;
     }
 
+    /**
+     * 获取税率级别的数量。
+     *
+     * @return 税率级别的数量
+     */
     public int get_size() {
         return size;
     }

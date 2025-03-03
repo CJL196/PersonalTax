@@ -1,56 +1,29 @@
-import java.util.Scanner;
-
-class ReadIntFromConsole {
-
-    /**
-     * 从控制台读取一个整数，并返回该值。
-     *
-     * @param prompt 提示信息（例如："请输入一个整数: "）
-     * @return 用户输入的整数
-     */
-    public static int readInt() {
-        Scanner scanner = new Scanner(System.in);
-        int number = 0; // 初始化变量
-        boolean isValid = false; // 标志输入是否有效
-
-        while (!isValid) {
-            try {
-                number = scanner.nextInt(); // 尝试读取整数
-                isValid = true; // 如果成功读取，标记为有效
-            } catch (Exception e) {
-                // 捕获异常，处理非整数输入的情况
-                System.out.println("输入无效，请输入一个32位整数！");
-                scanner.nextLine(); // 清除错误输入
-            }
-        }
-        // scanner 可以不关闭，因为它是方法内的局部变量
-        return number;
-    }
-    public static double readDouble() {
-        Scanner scanner = new Scanner(System.in);
-        double number = 0; // 初始化变量
-        boolean isValid = false; // 标志输入是否有效
-
-        while (!isValid) {
-            try {
-                number = scanner.nextDouble(); // 尝试读取浮点数
-                isValid = true; // 如果成功读取，标记为有效
-            } catch (Exception e) {
-                // 捕获异常，处理非浮点数输入的情况
-                System.out.println("输入无效，请输入一个64位浮点数！");
-                scanner.nextLine(); // 清除错误输入
-            }
-        }
-        // scanner 可以不关闭，因为它是方法内的局部变量
-        return number;
-    }
-
-}
-
+/**
+ * 个人所得税计算器应用程序
+ * 
+ * <p>此程序允许用户计算个人所得税、调整税率、调整个人所得税起征点以及打印当前配置。</p>
+ * 
+ * <p>主要功能包括：</p>
+ * <ul>
+ *   <li>输入工资计算个人所得税</li>
+ *   <li>调整税率</li>
+ *   <li>调整个人所得税起征点</li>
+ *   <li>打印当前配置</li>
+ *   <li>退出程序</li>
+ * </ul>
+ * 
+ * <p>程序通过控制台与用户交互，用户可以根据提示输入相应的选项和数据。</p>
+ * 
+ * <p>注意：此程序假设存在一个名为 ReadFromConsole 的类用于从控制台读取输入，
+ * 以及一个名为 calc 的类用于计算税收和管理税率配置。</p>
+ * 
+ * @version 1.0
+ * @author CJL
+ */
 public class app{
     public static void main(String[] args) {
         calc calculator = new calc();
-        // ReadIntFromConsole r = new ReadIntFromConsole();
+        // ReadFromConsole r = new ReadFromConsole();
         int choice = 0;
         while (true) {
             System.out.println("+------------------------+");
@@ -62,13 +35,13 @@ public class app{
             System.out.println("5. 退出");
             System.out.println("+------------------------+");
             System.out.printf("~>");
-            choice = ReadIntFromConsole.readInt();
+            choice = ReadFromConsole.readInt();
             if (choice == 1) {
                 boolean valid = false;
                 int salary = 0;
                 while (!valid) {
                     System.out.print("请输入您的工资: ");
-                    salary = ReadIntFromConsole.readInt();
+                    salary = ReadFromConsole.readInt();
                     if (salary < 0) {
                         System.out.println("工资必须为非负数！");
                         continue;
@@ -76,7 +49,7 @@ public class app{
                     valid = true;
                 }
                 
-                double tax = calculator.calc_tax(salary);
+                double tax = calculator.calcTax(salary);
                 System.out.println("您的税收为: " + tax);
             }
             else if (choice == 2) {
@@ -86,9 +59,9 @@ public class app{
                 // 判断输入是否合法
                 while (!valid) {
                     System.out.print("请输入税率等级: ");
-                    level = ReadIntFromConsole.readInt();
+                    level = ReadFromConsole.readInt();
                     System.out.print("请输入税率:(示例:0.10)");
-                    rate = ReadIntFromConsole.readDouble();
+                    rate = ReadFromConsole.readDouble();
                     if (level < 1 || level > calculator.get_size()) {
                         System.out.printf("Level must be between 1 and %d\n", calculator.get_size());
                         continue;
@@ -99,7 +72,7 @@ public class app{
                     }
                     valid = true;
                 }
-                calculator.set_tax_rate(level, rate);
+                calculator.setTaxRate(level, rate);
             }
             else if(choice == 3){
 
@@ -108,17 +81,17 @@ public class app{
                 while (!valid) {
                     
                     System.out.print("请输入个人所得税起征点: ");
-                    base = ReadIntFromConsole.readInt();
+                    base = ReadFromConsole.readInt();
                     if (base < 0) {
                         System.out.println("起征点必须为非负数！");
                         continue;
                     }
                     valid = true;
                 }
-                calculator.set_base(base);
+                calculator.setBase(base);
             }
             else if (choice == 4) {
-                calculator.print_settings();
+                calculator.printSettings();
             }
             else if (choice == 5) {
                 break;
