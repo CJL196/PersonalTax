@@ -109,6 +109,19 @@ public class calc {
     }
 
     /**
+     * 获取指定级别的税率（测试用）
+     * 
+     * @param level 税率级别
+     * @return 对应税率
+     */
+    public double getTaxRate(int level) {
+        if (level < 1 || level > size) {
+            throw new IllegalArgumentException("Invalid tax level");
+        }
+        return tax_rate[level - 1];
+    }
+
+    /**
      * 获取税率级别的数量。
      *
      * @return 税率级别的数量
