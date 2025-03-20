@@ -8,8 +8,14 @@ CLASS_FILES = $(SRC:.java=.class)
 TEST_CLASS = $(TEST_SRC:.java=.class)
 JUNIT_JAR = lib/junit-4.13.2.jar
 HAMCREST_JAR = lib/hamcrest-core-1.3.jar
+DOC_DIR = doc
 
 .PHONY: test
+
+build: $(CLASS_FILES)
+
+%.class: %.java
+	$(JAVAC) $<
 
 test: $(CLASS_FILES) $(TEST_CLASS)
 	$(JAVA) -cp .:$(JUNIT_JAR):$(HAMCREST_JAR) org.junit.runner.JUnitCore CalcTest
